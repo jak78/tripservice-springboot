@@ -1,10 +1,9 @@
 package com.octo.legacy.tripservice.tripservice.user;
 
-import com.octo.legacy.tripservice.tripservice.exception.CollaboratorCallException;
-
 public class UserSession {
 
 	private static final UserSession userSession = new UserSession();
+	public static final ThreadLocal<User> CONTEXT = new ThreadLocal<>();
 	
 	private UserSession() {
 	}
@@ -14,8 +13,7 @@ public class UserSession {
 	}
 
 	public User getLoggedUser() {
-		throw new CollaboratorCallException(
-				"UserSession.getLoggedUser() requires the code to be executed inside the application server");
+		return CONTEXT.get();
 	}
 
 }
